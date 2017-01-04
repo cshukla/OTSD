@@ -1,0 +1,45 @@
+---
+title: "bioRxivGrowth"
+author: "Chinmay Shukla"
+date: "1/3/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Read in input data
+
+To begin our analysis, we will first read in data about number of papers submitted to bioRxiv every month. I compiled this data manually from http://www.biorxiv.org/archive
+
+```{r bioRxiv}
+bioRxiv <- read.table("../data/bioRxivGrowth.tsv", sep="\t", header=T)
+```
+
+Before analyzing the data, lets see the type of the bioRxiv object which we used to read data from the input file. 
+
+```{r dataStructure}
+str(bioRxiv)
+typeof(bioRxiv$Month)
+```
+
+We see that bioRxiv is a data frame of integers. While this works fine for Preprints, Month and perhaps even year should be stored as factors. Another problem is that the default ordering of defining factors would not work very well here and so we should tell R exactly how we want the months arranged. Finally, while abbreviations are used for most months, March and April should be abbreviated for consistency. Such problems are common in real world data sources and hence I decided to include this here. 
+
+So now lets do a little data wrangling.
+
+```{r dataWrangling}
+bioRxiv$Month <- gsub("March", "Mar", bioRxiv$Month)
+bioRxiv$Month <- gsub("April", "Apr", bioRxiv$Month)
+bioRxiv$Month_f <- factor(bioRxiv$Month, levels=c("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"))
+```
+
+## Exploratory Plots
+
+We can start to plot the data and see if we see any interesting trends now. I am going to make a bar graph of the # of Preprints in each month and fragment it by Year. 
+
+```{r eda}
+library(ggplot2)
+ggplot(bioRxiv, aes(x=Month_f, y=Preprints)) + geom_bar(stat="identity") + facet_grid(.~Year) + theme_bw()
+```
+
