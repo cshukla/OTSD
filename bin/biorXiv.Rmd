@@ -31,7 +31,8 @@ So now lets do a little data wrangling.
 ```{r dataWrangling}
 bioRxiv$Month <- gsub("March", "Mar", bioRxiv$Month)
 bioRxiv$Month <- gsub("April", "Apr", bioRxiv$Month)
-bioRxiv$Month_f <- factor(bioRxiv$Month, levels=c("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"))
+bioRxiv$Month_f <- factor(bioRxiv$Month, 
+                          levels=c("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"))
 ```
 
 ## Exploratory Plots
