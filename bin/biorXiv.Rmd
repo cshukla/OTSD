@@ -72,14 +72,33 @@ prettyGG <- function(gg, xLab, yLab, titleLab, subtitleLab,
 ```
 
 
-```{r finalPlots}
+```{r PrettyPlot, out.width='2000px', dpi=600}
 ggPretty <- prettyGG(gg, xLab="Month", yLab = "# of Preprints", 
                      titleLab = "Number of preprints submitted to bioRXiv every month",
-                     subtitleLab = "The number of preprints submitted to bioRxiv 
-                     from its inception in Nov 2013 has increased exponentially", 
-                     fontFamily = "Verdana", 
-                     xJust = c(rep(0.5,12)), yJust = c(0, 0.5, 0.5, 1))
+                     subtitleLab = "The number of preprints submitted to bioRxiv from its inception in Nov 2013 has increased exponentially", 
+                     fontFamily = "Verdana", axisTextSize=4,
+                     xJust = c(rep(0.5,12)), yJust = c(0, 0.5, 0.5, 1), 
+                     axisTitleSize=8, plotTitleSize=11, plotSubtitleSize=8)
 
 ggPretty
 
 ```
+
+Another way to summarize and understand the explosion in preprints on bioRxiv is to look at how the median number of preprints in a month has changed from 2013 to 2016. Lets do that now. We will use dplyr to group our data by year and summarize using the median number of preprints in each group (year) and like always ggplot to display our results.
+
+```{r medianMonthlyPreprints, out.width='2000px', dpi=600}
+library(dplyr)
+byYear <- group_by(bioRxiv, Year)
+byYear <- summarise(byYear, median(Preprints))
+colnames(byYear) <- c("Year", "medianPreprints")
+gg <- ggplot(byYear, aes(x=factor(Year), y=medianPreprints)) + geom_bar(stat="identity") + theme_bw()
+ggPretty <- prettyGG(gg, xLab = "Year", 
+                     yLab = "Median monthly Preprints submitted to bioRxiv", 
+                     titleLab = "Median number of preprints submitted to bioRxiv in a month for each year", 
+                     subtitleLab = "Every year the median number of articles submitted to bioRxiv in a month increases by a factor of 2 or more", 
+                     axisTextSize = 6, 
+                     xJust = c(0, rep(0.5, 2), 1), yJust = c(0, rep(0.5, 3), 1),
+                     axisTitleSize = 8, plotTitleSize = 10, plotSubtitleSize = 8)
+ggPretty
+```
+
