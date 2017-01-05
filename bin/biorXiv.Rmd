@@ -32,7 +32,8 @@ So now lets do a little data wrangling.
 bioRxiv$Month <- gsub("March", "Mar", bioRxiv$Month)
 bioRxiv$Month <- gsub("April", "Apr", bioRxiv$Month)
 bioRxiv$Month_f <- factor(bioRxiv$Month, 
-                          levels=c("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"))
+                          levels=c("Jan", "Feb", "Mar", "Apr", "May", "June", "July",
+                                   "Aug", "Sep", "Oct", "Nov", "Dec"))
 ```
 
 ## Exploratory Plots
@@ -41,6 +42,44 @@ We can start to plot the data and see if we see any interesting trends now. I am
 
 ```{r eda}
 library(ggplot2)
-ggplot(bioRxiv, aes(x=Month_f, y=Preprints)) + geom_bar(stat="identity") + facet_grid(.~Year) + theme_bw()
+library(extrafont)
+gg <- ggplot(bioRxiv, aes(x=Month_f, y=Preprints)) + geom_bar(stat="identity") + facet_grid(.~Year) + theme_bw()
 ```
 
+We can use the steps described in our post on prettifying ggplots to make this look more professional. Below I have described the steps as a function.
+
+```{r ggplotPretty}
+prettyGG <- function(gg, xLab, yLab, titleLab, subtitleLab, 
+                     fontFamily="Verdana", axisTextSize=8, xJust, yJust,
+                     axisTitleSize=11, plotTitleSize=14, plotSubtitleSize=11)
+  {
+  ggPretty <- gg + labs(x=xLab, y=yLab, title=titleLab, subtitle = subtitleLab)
+  ggPretty <- ggPretty + theme_bw(base_family = fontFamily)
+  ggPretty <- ggPretty + theme(plot.margin=margin(10, 10, 10, 10))
+  ggPretty <- ggPretty + theme(panel.grid.minor=element_blank())
+  ggPretty <- ggPretty + theme(panel.grid.major=element_line(linetype="dotted", size=0.5))
+  ggPretty <- ggPretty + theme(axis.ticks=element_blank())
+  ggPretty <- ggPretty + theme(axis.text=element_text(size=axisTextSize))
+  ggPretty <- ggPretty + theme(axis.text.x=element_text(hjust=xJust))
+  ggPretty <- ggPretty + theme(axis.text.y=element_text(vjust=yJust))
+  ggPretty <- ggPretty + theme(axis.title.x=element_text(hjust=0.5, face="bold", size=axisTitleSize))
+  ggPretty <- ggPretty + theme(axis.title.y=element_text(vjust=0.5, face="bold", size=axisTitleSize))
+  ggPretty <- ggPretty + theme(plot.title=element_text(hjust=0, face="bold", size=plotTitleSize))
+  ggPretty <- ggPretty + theme(plot.subtitle=element_text(hjust=0, face="italic", size=plotSubtitleSize))
+  
+  return(ggPretty)
+}
+```
+
+
+```{r finalPlots}
+ggPretty <- prettyGG(gg, xLab="Month", yLab = "# of Preprints", 
+                     titleLab = "Number of preprints submitted to bioRXiv every month",
+                     subtitleLab = "The number of preprints submitted to bioRxiv 
+                     from its inception in Nov 2013 has increased exponentially", 
+                     fontFamily = "Verdana", 
+                     xJust = c(rep(0.5,12)), yJust = c(0, 0.5, 0.5, 1))
+
+ggPretty
+
+```
