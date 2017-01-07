@@ -102,3 +102,18 @@ ggPretty <- prettyGG(gg, xLab = "Year",
 ggPretty
 ```
 
+One of the things I am curious about is if the number of preprints submitted to bioRxiv peaks during a particular month. One simple way to answer this question is to divide our data by year and then look at the months with the 3 highest submissions. Since bioRxiv came online only in Nov 2013, we will discard 2013 from this analysis
+
+```{r maxMonthByYear}
+rXiv2014 <- bioRxiv %>% filter(Year=="2014") %>% arrange(desc(Preprints))
+rXiv2015 <- bioRxiv %>% filter(Year=="2015") %>% arrange(desc(Preprints))
+rXiv2016 <- bioRxiv %>% filter(Year=="2016") %>% arrange(desc(Preprints))
+
+rXiv2014$Month[1:3]
+rXiv2015$Month[1:3]
+rXiv2016$Month[1:3]
+```
+
+This is very interesting. It seems the preprints submitted peak towards the end of the year. There could be 2 factors - 1). Scientists are rushing to get their papers out in a particular calendar year and Dec is the deadline for that and so there are a lot of submissions then or 2).bioRxiv is continuously increasing in its popularity and so as time goes by more people are submitting their research. Hence for a given year, the peak would be at the end of year.
+
+My guess is that its a combination of the 2 but time will help us know if one factor is particularly dominant over the other.
