@@ -12,238 +12,291 @@ library(tidyverse)
 
 ## Download EPL data for the last several years
 
-```{r downloadData}
+```{r downloadData, cache=FALSE, message=FALSE}
 #1992-1993 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-92-93.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1992  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-92-93.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1992  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1992 <- t(epl1992)
 colnames(epl1992) <- colnames(as.data.frame(jsonData[[1]]))
 epl1992 <- as.data.frame(epl1992)
-epl1992$Year <- rep('1992-1993', len=nrow(epl1992))
+epl1992$Year <- rep('1992-1993', len = nrow(epl1992))
+
 
 #1993-1994 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-93-94.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1993  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-93-94.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1993  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1993 <- t(epl1993)
 colnames(epl1993) <- colnames(as.data.frame(jsonData[[1]]))
 epl1993 <- as.data.frame(epl1993)
-epl1993$Year <- rep('1993-1994', len=nrow(epl1993))
+epl1993$Year <- rep('1993-1994', len = nrow(epl1993))
 
 #1994-1995 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-94-95.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1994  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-94-95.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1994  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1994 <- t(epl1994)
 colnames(epl1994) <- colnames(as.data.frame(jsonData[[1]]))
 epl1994 <- as.data.frame(epl1994)
-epl1994$Year <- rep('1994-1995', len=nrow(epl1994))
+epl1994$Year <- rep('1994-1995', len = nrow(epl1994))
 
 #1995-1996 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-95-96.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1995  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-95-96.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1995  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1995 <- t(epl1995)
 colnames(epl1995) <- colnames(as.data.frame(jsonData[[1]]))
 epl1995 <- as.data.frame(epl1995)
-epl1995$Year <- rep('1995-1996', len=nrow(epl1995))
+epl1995$Year <- rep('1995-1996', len = nrow(epl1995))
 
 #1996-1997 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-96-97.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1996  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-96-97.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1996  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1996 <- t(epl1996)
 colnames(epl1996) <- colnames(as.data.frame(jsonData[[1]]))
 epl1996 <- as.data.frame(epl1996)
-epl1996$Year <- rep('1996-1997', len=nrow(epl1996))
+epl1996$Year <- rep('1996-1997', len = nrow(epl1996))
 
 #1997-1998 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-97-98.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1997  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-97-98.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1997  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1997 <- t(epl1997)
 colnames(epl1997) <- colnames(as.data.frame(jsonData[[1]]))
 epl1997 <- as.data.frame(epl1997)
-epl1997$Year <- rep('1997-1998', len=nrow(epl1997))
+epl1997$Year <- rep('1997-1998', len = nrow(epl1997))
 
 #1998-1999 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-98-99.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1998  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-98-99.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1998  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1998 <- t(epl1998)
 colnames(epl1998) <- colnames(as.data.frame(jsonData[[1]]))
 epl1998 <- as.data.frame(epl1998)
-epl1998$Year <- rep('1998-1999', len=nrow(epl1998))
+epl1998$Year <- rep('1998-1999', len = nrow(epl1998))
 
 #1999-2000 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-99-00.json'
-jsonData <- fromJSON(file=jsonFile)
-epl1999  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-99-00.json'
+jsonData <- fromJSON(file = jsonFile)
+epl1999  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl1999 <- t(epl1999)
 colnames(epl1999) <- colnames(as.data.frame(jsonData[[1]]))
 epl1999 <- as.data.frame(epl1999)
-epl1999$Year <- rep('1999-2000', len=nrow(epl1999))
+epl1999$Year <- rep('1999-2000', len = nrow(epl1999))
 
 #2000-2001 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-00-01.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2000  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-00-01.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2000  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2000 <- t(epl2000)
 colnames(epl2000) <- colnames(as.data.frame(jsonData[[1]]))
 epl2000 <- as.data.frame(epl2000)
-epl2000$Year <- rep('2000-2001', len=nrow(epl2000))
+epl2000$Year <- rep('2000-2001', len = nrow(epl2000))
 
 #2001-2002 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-01-02.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2001  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-01-02.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2001  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2001 <- t(epl2001)
 colnames(epl2001) <- colnames(as.data.frame(jsonData[[1]]))
 epl2001 <- as.data.frame(epl2001)
-epl2001$Year <- rep('2001-2002', len=nrow(epl2001))
+epl2001$Year <- rep('2001-2002', len = nrow(epl2001))
 
 #2002-2003 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-02-03.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2002  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-02-03.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2002  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2002 <- t(epl2002)
 colnames(epl2002) <- colnames(as.data.frame(jsonData[[1]]))
 epl2002 <- as.data.frame(epl2002)
-epl2002$Year <- rep('2002-2003', len=nrow(epl2002))
-epl2002$points <- gsub("\\*", "", epl2002$points) # Additional cleaning required for this particular year
+epl2002$Year <- rep('2002-2003', len = nrow(epl2002))
+epl2002$points <-
+gsub("\\*", "", epl2002$points) # Additional cleaning required for this particular year
 
 #2003-2004 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-03-04.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2003  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-03-04.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2003  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2003 <- t(epl2003)
 colnames(epl2003) <- colnames(as.data.frame(jsonData[[1]]))
 epl2003 <- as.data.frame(epl2003)
-epl2003$Year <- rep('2003-2004', len=nrow(epl2003))
+epl2003$Year <- rep('2003-2004', len = nrow(epl2003))
 
 #2004-2005 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-04-05.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2004  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-04-05.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2004  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2004 <- t(epl2004)
 colnames(epl2004) <- colnames(as.data.frame(jsonData[[1]]))
 epl2004 <- as.data.frame(epl2004)
-epl2004$Year <- rep('2004-2005', len=nrow(epl2004))
+epl2004$Year <- rep('2004-2005', len = nrow(epl2004))
 
 #2005-2006 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-05-06.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2005  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-05-06.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2005  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2005 <- t(epl2005)
 colnames(epl2005) <- colnames(as.data.frame(jsonData[[1]]))
 epl2005 <- as.data.frame(epl2005)
-epl2005$Year <- rep('2005-2006', len=nrow(epl2005))
+epl2005$Year <- rep('2005-2006', len = nrow(epl2005))
 
 #2006-2007 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-06-07.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2006  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-06-07.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2006  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2006 <- t(epl2006)
 colnames(epl2006) <- colnames(as.data.frame(jsonData[[1]]))
 epl2006 <- as.data.frame(epl2006)
-epl2006$Year <- rep('2006-2007', len=nrow(epl2006))
+epl2006$Year <- rep('2006-2007', len = nrow(epl2006))
 
 #2007-2008 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-07-08.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2007  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-07-08.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2007  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2007 <- t(epl2007)
 colnames(epl2007) <- colnames(as.data.frame(jsonData[[1]]))
 epl2007 <- as.data.frame(epl2007)
-epl2007$Year <- rep('2007-2008', len=nrow(epl2007))
+epl2007$Year <- rep('2007-2008', len = nrow(epl2007))
 
 #2008-2009 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-08-09.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2008  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-08-09.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2008  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2008 <- t(epl2008)
 colnames(epl2008) <- colnames(as.data.frame(jsonData[[1]]))
 epl2008 <- as.data.frame(epl2008)
-epl2008$Year <- rep('2008-2009', len=nrow(epl2008))
+epl2008$Year <- rep('2008-2009', len = nrow(epl2008))
 
 #2009-2010 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-09-10.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2009  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-09-10.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2009  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2009 <- t(epl2009)
 colnames(epl2009) <- colnames(as.data.frame(jsonData[[1]]))
 epl2009 <- as.data.frame(epl2009)
-epl2009$Year <- rep('2009-2010', len=nrow(epl2009))
+epl2009$Year <- rep('2009-2010', len = nrow(epl2009))
 
 #2010-2011 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-10-11.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2010  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-10-11.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2010  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2010 <- t(epl2010)
 colnames(epl2010) <- colnames(as.data.frame(jsonData[[1]]))
 epl2010 <- as.data.frame(epl2010)
-epl2010$Year <- rep('2010-2011', len=nrow(epl2010))
+epl2010$Year <- rep('2010-2011', len = nrow(epl2010))
 
 #2011-2012 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-11-12.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2011  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-11-12.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2011  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2011 <- t(epl2011)
 colnames(epl2011) <- colnames(as.data.frame(jsonData[[1]]))
 epl2011 <- as.data.frame(epl2011)
-epl2011$Year <- rep('2011-2012', len=nrow(epl2011))
+epl2011$Year <- rep('2011-2012', len = nrow(epl2011))
 
 #2012-2013 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-12-13.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2012  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-12-13.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2012  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2012 <- t(epl2012)
 colnames(epl2012) <- colnames(as.data.frame(jsonData[[1]]))
 epl2012 <- as.data.frame(epl2012)
-epl2012$Year <- rep('2012-2013', len=nrow(epl2012))
+epl2012$Year <- rep('2012-2013', len = nrow(epl2012))
 
 #2013-2014 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-13-14.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2013  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-13-14.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2013  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2013 <- t(epl2013)
 colnames(epl2013) <- colnames(as.data.frame(jsonData[[1]]))
 epl2013 <- as.data.frame(epl2013)
-epl2013$Year <- rep('2013-2014', len=nrow(epl2013))
+epl2013$Year <- rep('2013-2014', len = nrow(epl2013))
 
 #2014-2015 Season
-jsonFile <- 'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-14-15.json'
-jsonData <- fromJSON(file=jsonFile)
-epl2014  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonFile <-
+'https://raw.githubusercontent.com/jokecamp/FootballData/master/EPL%201992%20-%202015/tables/epl-14-15.json'
+jsonData <- fromJSON(file = jsonFile)
+epl2014  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2014 <- t(epl2014)
 colnames(epl2014) <- colnames(as.data.frame(jsonData[[1]]))
 epl2014 <- as.data.frame(epl2014)
-epl2014$Year <- rep('2014-2015', len=nrow(epl2014))
+epl2014$Year <- rep('2014-2015', len = nrow(epl2014))
 
 #2015-2016 Season
-jsonData <- fromJSON(file='~/Documents/Research/OTSD/data/epl2015.json')
-epl2015  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonData <-
+fromJSON(file = '~/Documents/Research/OTSD/data/epl2015.json')
+epl2015  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2015 <- t(epl2015)
 colnames(epl2015) <- colnames(as.data.frame(jsonData[[1]]))
 epl2015 <- as.data.frame(epl2015)
-epl2015$Year <- rep('2015-2016', len=nrow(epl2015))
+epl2015$Year <- rep('2015-2016', len = nrow(epl2015))
 
 #2016-2017 Season
-jsonData <- fromJSON(file='~/Documents/Research/OTSD/data/epl2016.json')
-epl2016  <-  as.data.frame(matrix(unlist(jsonData), nrow=length(unlist(jsonData[1]))))
+jsonData <-
+fromJSON(file = '~/Documents/Research/OTSD/data/epl2016.json')
+epl2016  <-
+as.data.frame(matrix(unlist(jsonData), nrow = length(unlist(jsonData[1]))))
 epl2016 <- t(epl2016)
 colnames(epl2016) <- colnames(as.data.frame(jsonData[[1]]))
 epl2016 <- as.data.frame(epl2016)
-epl2016$Year <- rep('2016-2017', len=nrow(epl2016))
+epl2016$Year <- rep('2016-2017', len = nrow(epl2016))
 ```
 
-## Including Plots
+## Build EPL data frame with results from all years
 
-You can also embed plots, for example:
-
-```{r build EPL Object}
-epl <- dplyr::bind_rows(epl1992, epl1993, epl1994, epl1995, epl1996, epl1997, epl1998, epl1999, epl2000, epl2001, epl2002, epl2003, epl2004, epl2005, epl2006, epl2007, epl2008, epl2009, epl2010, epl2011, epl2012, epl2013, epl2014, epl2015, epl2016)
+```{r build EPL Object, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+epl <- dplyr::bind_rows(epl1992, epl1993, epl1994, epl1995, epl1996, epl1997, epl1998, 
+                        epl1999, epl2000, epl2001, epl2002, epl2003, epl2004, epl2005, 
+                        epl2006, epl2007, epl2008, epl2009, epl2010, epl2011, epl2012, 
+                        epl2013, epl2014, epl2015, epl2016)
 
 epl <- tbl_df(epl)
 epl <- select(epl, -Notes, -notes)
@@ -260,10 +313,49 @@ epl$goals.dff <- as.numeric(epl$goals.dff)
 epl$points <- as.numeric(epl$points)
 rownames(epl) <- NULL
 epl$prcntPts <- 100*epl$points/(epl$played*3)
+epl$prcntDraws <- 100*epl$draws/epl$played
+epl$prcntWins <- 100*epl$wins/epl$played
+epl$prcntLosses <- 100*epl$losses/epl$played
 
 ```
 
-```{r plots, echo=FALSE}
-ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=Year, y=prcntPts, color=rank, group=rank)) + geom_smooth(method = 'loess', se=TRUE, alpha=0.1) + theme_bw() + theme(axis.text.x = element_text(angle = 315, hjust = 0))
+## Plot the evolution of points required to win the EPL over time
+
+```{r pointsEvolution, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=Year, y=prcntPts, color=rank, group=rank)) + 
+  geom_smooth(method = 'loess', se=TRUE, alpha=0.1) + 
+  theme_bw() + theme(axis.text.x = element_text(angle = 315, hjust = 0))
 
 ```
+
+## On average, how many games does the EPL champion win?
+
+```{r gamesWon, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=1, y=prcntWins, color=rank)) + geom_boxplot() + theme_bw() + 
+  xlab('') + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), legend.position = c(0.9,0.8)) + 
+  scale_y_continuous(limits=c(25,80))
+
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=prcntPts, color=rank)) + 
+  geom_density() + theme_bw() + theme(legend.position = c(0.9,0.8))
+```
+
+## On average, how many games does the EPL champion draw?
+
+```{r gamesDrawn, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=1, y=prcntDraws, color=rank)) + geom_boxplot() + theme_bw() + 
+  xlab('') + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), legend.position = c(0.9,0.8)) 
+
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=prcntDraws, color=rank)) + 
+  geom_density() + theme_bw() + theme(legend.position = c(0.9,0.8))
+```
+
+## On average, how many games does the EPL champion draw?
+
+```{r gamesLost, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=1, y=prcntLosses, color=rank)) + geom_boxplot() + theme_bw() + 
+  xlab('') + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), legend.position = c(0.1,0.8)) 
+
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=prcntLosses, color=rank)) + 
+  geom_density() + theme_bw() + theme(legend.position = c(0.9,0.8))
+```
+
