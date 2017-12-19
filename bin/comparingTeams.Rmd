@@ -1,0 +1,42 @@
+---
+title: "comparingWinnersToOthers"
+author: "Chinmay Shukla"
+date: "12/17/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### On average, how many games does the EPL champion win?
+
+```{r gamesWon, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=1, y=prcntWins, color=rank)) + geom_boxplot() + theme_bw() + 
+  xlab('') + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), legend.position = c(0.9,0.8)) + 
+  scale_y_continuous(limits=c(25,80))
+
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=prcntPts, color=rank)) + 
+  geom_density() + theme_bw() + theme(legend.position = c(0.9,0.8))
+```
+
+### On average, how many games does the EPL champion draw?
+
+```{r gamesDrawn, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=1, y=prcntDraws, color=rank)) + geom_boxplot() + theme_bw() + 
+  xlab('') + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), legend.position = c(0.9,0.8)) 
+
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=prcntDraws, color=rank)) + 
+  geom_density() + theme_bw() + theme(legend.position = c(0.9,0.8))
+```
+
+## On average, how many games does the EPL champion draw?
+
+```{r gamesLost, cache=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=1, y=prcntLosses, color=rank)) + geom_boxplot() + theme_bw() + 
+  xlab('') + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), legend.position = c(0.1,0.8)) 
+
+ggplot(filter(epl, rank%in%c(1,2,3,4)), aes(x=prcntLosses, color=rank)) + 
+  geom_density() + theme_bw() + theme(legend.position = c(0.9,0.8))
+```
+
