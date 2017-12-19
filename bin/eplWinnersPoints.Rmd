@@ -12,7 +12,7 @@ library(tidyverse)
 
 ```
 
-#### Three takeaways from the following analysis:
+#### Three big takeaways from the following analysis:
 
 1. The premier league is becoming more competitive at the top again
 2. The English teams will likely do very well in the Champions League starting this year
@@ -71,7 +71,7 @@ ggplot(eplWinners, aes(x=Year, y=prcntPts)) +
   theme_classic() + theme(axis.text.x = element_text(angle=315, hjust=0, vjust=1), legend.position = 'NA')
 ```
 
-```{r winnerLine, cache=FALSE, message=FALSE}
+```{r winnerLoess, cache=FALSE, message=FALSE}
 
 ggplot(eplWinners, aes(x=Year, y=prcntPts)) + geom_smooth(aes(group=rank), se=FALSE, color='red') + 
   scale_y_continuous(limits=c(65,85)) + ylab('Percentage of Points Won') + 
@@ -80,42 +80,129 @@ ggplot(eplWinners, aes(x=Year, y=prcntPts)) + geom_smooth(aes(group=rank), se=FA
 
 ### How many games does an EPL champion win?
 
-```{r winnerBoxplot, cache=FALSE, message=FALSE}
+```{r winsBoxplot, cache=FALSE, message=FALSE}
 
 ggplot(eplWinners, aes(x=1, y=prcntWins*(0.38))) + geom_boxplot() + theme_classic() + 
-  ylab('Number of Games Won') + xlab('') + 
+  ylab('Number of Games Won') + xlab('') + scale_y_discrete(limits=c(22, 23, 24, 25, 26, 27, 28, 29, 30, 31)) +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 ```
 
-```{r eplMedianPoints, cache=FALSE, message=FALSE}
+```{r eplMedianWins, cache=FALSE, message=FALSE}
 
 median(eplWinners$prcntWins)
 median(eplWinners$prcntWins)*(.38)
 ```
 
-```{r epl90PrcntWinners, cache=FALSE, message=FALSE}
+```{r epl90PrcntWins, cache=FALSE, message=FALSE}
 
 quantile(eplWinners$prcntWins, 0.9)*(.38)
 ```
 
-```{r winnerPointsDist, cache=FALSE, message=FALSE}
+```{r winsDist, cache=FALSE, message=FALSE}
 
-ggplot(eplWinners, aes(x=prcntWins*(.38))) + geom_density(adjust=2/3) + theme_classic() + xlab('Number of Wins')
+ggplot(eplWinners, aes(x=prcntWins*(.38))) + geom_density(adjust=2/3) + 
+  scale_x_discrete(limits=c(21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31)) + theme_classic() + xlab('Number of Wins')
 ```
 
 #### Percentage of games won by EPL champions over time
 
-```{r winnerLine, cache=FALSE, message=FALSE, echo=FALSE}
+```{r winsLine, cache=FALSE, message=FALSE, echo=FALSE}
 
 ggplot(eplWinners, aes(x=Year, y=prcntWins*(.38))) + 
-  geom_point(aes(color='red', size=2, alpha=0.5)) + 
-  geom_line(aes(group=rank)) + scale_y_continuous(limits=c(21,31)) + ylab('Number of Games Won') +
+  geom_point(aes(color='red', size=2, alpha=0.5)) + scale_y_discrete(limits=c(21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31)) +
+  geom_line(aes(group=rank)) + ylab('Number of Games Won') +
   theme_classic() + theme(axis.text.x = element_text(angle=315, hjust=0, vjust=1), legend.position = 'NA')
 ```
 
-```{r winnerLine, cache=FALSE, message=FALSE}
+```{r winsLoess, cache=FALSE, message=FALSE}
 
 ggplot(eplWinners, aes(x=Year, y=prcntWins*(.38))) + geom_smooth(aes(group=rank), se=FALSE, color='red') + 
-  scale_y_continuous(limits=c(21,31)) + ylab('Number of Games Won') + 
+  ylab('Number of Games Won') + 
+  theme_classic() + theme(axis.text.x = element_text(angle=315, hjust=0, vjust=1), legend.position = 'NA')
+```
+
+### How many games does an EPL champion draw?
+
+```{r drawsBoxplot, cache=FALSE, message=FALSE}
+
+ggplot(eplWinners, aes(x=1, y=prcntDraws*(0.38))) + geom_boxplot() + theme_classic() + 
+  ylab('Number of Draws') + xlab('') + scale_y_discrete(limits=c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+```
+
+```{r eplMedianDraws, cache=FALSE, message=FALSE}
+
+median(eplWinners$prcntDraws)
+median(eplWinners$prcntDraws)*(.38)
+```
+
+```{r epl90PrcntDraws, cache=FALSE, message=FALSE}
+
+quantile(eplWinners$prcntDraws, 0.9)*(.38)
+```
+
+```{r drawsPointsDist, cache=FALSE, message=FALSE}
+
+ggplot(eplWinners, aes(x=prcntDraws*(.38))) + geom_density(adjust=2/3) + 
+  scale_x_discrete(limits=c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)) + theme_classic() + xlab('Number of Draws')
+```
+
+#### Percentage of games drawn by EPL champions over time
+
+```{r drawsLine, cache=FALSE, message=FALSE, echo=FALSE}
+
+ggplot(eplWinners, aes(x=Year, y=prcntDraws*(.38))) + 
+  geom_point(aes(color='red', size=2, alpha=0.5)) + geom_line(aes(group=rank)) +
+  scale_y_discrete(limits=c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)) + ylab('Number of Games Drawn') +
+  theme_classic() + theme(axis.text.x = element_text(angle=315, hjust=0, vjust=1), legend.position = 'NA')
+```
+
+```{r drawsLoess, cache=FALSE, message=FALSE}
+
+ggplot(eplWinners, aes(x=Year, y=prcntDraws*(.38))) + geom_smooth(aes(group=rank), se=FALSE, color='red') + 
+  ylab('Number of Games Drawn') + 
+  theme_classic() + theme(axis.text.x = element_text(angle=315, hjust=0, vjust=1), legend.position = 'NA')
+```
+
+### How many games does an EPL champion lose?
+
+```{r lossesBoxplot, cache=FALSE, message=FALSE}
+
+ggplot(eplWinners, aes(x=1, y=prcntLosses*(0.38))) + geom_boxplot() + theme_classic() + 
+  ylab('Number of Draws') + xlab('') + scale_y_discrete(limits=c(0, 1, 2, 3, 4, 5, 6)) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+```
+
+```{r eplMedianLosses, cache=FALSE, message=FALSE}
+
+median(eplWinners$prcntLosses)
+median(eplWinners$prcntLosses)*(.38)
+```
+
+```{r epl90PrcntLosses, cache=FALSE, message=FALSE}
+
+quantile(eplWinners$prcntLosses, 0.9)*(.38)
+```
+
+```{r LossesDist, cache=FALSE, message=FALSE}
+
+ggplot(eplWinners, aes(x=prcntLosses*(.38))) + geom_density(adjust=2/3) + 
+  scale_x_discrete(limits=c(0, 1, 2, 3, 4, 5, 6)) + theme_classic() + xlab('Number of Draws')
+```
+
+#### Percentage of games lost by EPL champions over time
+
+```{r LossesLine, cache=FALSE, message=FALSE, echo=FALSE}
+
+ggplot(eplWinners, aes(x=Year, y=prcntLosses*(.38))) + 
+  geom_point(aes(color='red', size=2, alpha=0.5)) + geom_line(aes(group=rank)) +
+  scale_y_discrete(limits=c(0, 1, 2, 3, 4, 5, 6)) + ylab('Number of Games Drawn') +
+  theme_classic() + theme(axis.text.x = element_text(angle=315, hjust=0, vjust=1), legend.position = 'NA')
+```
+
+```{r LossesLoess, cache=FALSE, message=FALSE}
+
+ggplot(eplWinners, aes(x=Year, y=prcntLosses*(.38))) + geom_smooth(aes(group=rank), se=FALSE, color='red') + 
+  ylab('Number of Games Drawn') + 
   theme_classic() + theme(axis.text.x = element_text(angle=315, hjust=0, vjust=1), legend.position = 'NA')
 ```
